@@ -1,4 +1,48 @@
---Auto Start
-if getgenv().AutoStartDungeon then
-        game:GetService("ReplicatedStorage").remotes.changeStartValue:FireServer()
+--Auto SetUp Character
+if getgenv().AutoSetUp then
+                local args = {
+            [1] = {
+                [1] = {
+                    [1] = "\1"
+                },
+                [2] = "2"
+            }
+        }
+        
+        game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))
+        wait(1.5)
+        local args = {
+            [1] = {
+                [1] = "ui",
+                [2] = "LeaderboardGui"
+            }
+        }
+        
+        game:GetService("ReplicatedStorage").Utility.AssetRequester.Remote:InvokeServer(unpack(args))
+        local args = {
+            [1] = "GetWeapons"
+        }
+        
+        game:GetService("ReplicatedStorage").remotes.getData:InvokeServer(unpack(args))
+        game:GetService("ReplicatedStorage").remotes.reloadInvy:InvokeServer()
+        local args = {
+            [1] = "Desert Temple"
+        }
+        
+        game:GetService("ReplicatedStorage").remotes.getDungeonStats:InvokeServer(unpack(args))
+        
+        local args = {
+            [1] = {
+                [1] = {
+                    [1] = "\1",
+                    [2] = {
+                        ["\3"] = "select",
+                        ["characterIndex"] = 1
+                    }
+                },
+                [2] = "L"
+            }
+        }
+        
+        game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))     
 end
