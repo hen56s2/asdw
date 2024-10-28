@@ -1,5 +1,5 @@
 --Auto SetUp Character
-if getgenv().AutoSetUp then
+if getgenv().AutoMenu then
                 local args = {
             [1] = {
                 [1] = {
