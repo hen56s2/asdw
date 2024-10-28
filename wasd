@@ -1,0 +1,4 @@
+--Auto Start
+if getgenv().AutoStartDungeon then
+        game:GetService("ReplicatedStorage").remotes.changeStartValue:FireServer()
+end
