@@ -52,8 +52,8 @@ if getgenv().AutoMenu then
     
     wait(0.9)
     
-    local success, err = pcall(function()
-
+     local success, err = pcall(function()
+    
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -717,6 +717,23 @@ Fluent:Notify({
 -- which has been marked to be one that auto loads!
 SaveManager:LoadAutoloadConfig()
 
+-- Auto rejoin function with specific game ID
+local function AutoRejoin()
+    local ts = game:GetService("TeleportService")
+    local p = game:GetService("Players").LocalPlayer
+    
+    ts:Teleport(2414851778, p)  -- Using your specific game ID
+end
+
+-- Connect to the kicked event
+game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+    if child.Name == 'ErrorPrompt' then
+        local errorMessage = child:WaitForChild("MessageArea"):WaitForChild("ErrorFrame"):WaitForChild("ErrorMessage")
+        wait(0.1) -- Reduced delay for faster rejoin
+        AutoRejoin()
+    end
+end)
+
 -- Function to create rainbow effect
 local function startRainbowEffect(titleLabel)
     spawn(function()
@@ -879,24 +896,6 @@ end)
 
 local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
-
--- Auto rejoin function with specific game ID
-local function AutoRejoin()
-    local ts = game:GetService("TeleportService")
-    local p = game:GetService("Players").LocalPlayer
-    
-    ts:Teleport(2414851778, p)  -- Using your specific game ID
-end
-
--- Connect to the kicked event
-game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
-    if child.Name == 'ErrorPrompt' then
-        local errorMessage = child:WaitForChild("MessageArea"):WaitForChild("ErrorFrame"):WaitForChild("ErrorMessage")
-        wait(0.1) -- Reduced delay for faster rejoin
-        AutoRejoin()
-    end
-end)
-
 end)
 
     if not success then
