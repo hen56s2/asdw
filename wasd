@@ -1,52 +1,64 @@
 if getgenv().AutoMenu then
-      local args = {
+    print("AutoMenu is enabled.")
+    
+    local args = {
+        [1] = {
             [1] = {
-                [1] = {
-                    [1] = "\1"
-                },
-                [2] = "2"
-            }
+                [1] = "\1"
+            },
+            [2] = "2"
         }
-        
-        game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))
-        wait(1.5)
-        local args = {
+    }
+    
+    game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))
+    wait(1.5)
+    
+    local args = {
+        [1] = {
+            [1] = "ui",
+            [2] = "LeaderboardGui"
+        }
+    }
+    
+    game:GetService("ReplicatedStorage").Utility.AssetRequester.Remote:InvokeServer(unpack(args))
+    
+    local args = {
+        [1] = "GetWeapons"
+    }
+    
+    game:GetService("ReplicatedStorage").remotes.getData:InvokeServer(unpack(args))
+    game:GetService("ReplicatedStorage").remotes.reloadInvy:InvokeServer()
+    
+    local args = {
+        [1] = "Desert Temple"
+    }
+    
+    game:GetService("ReplicatedStorage").remotes.getDungeonStats:InvokeServer(unpack(args))
+    
+    local args = {
+        [1] = {
             [1] = {
-                [1] = "ui",
-                [2] = "LeaderboardGui"
-            }
+                [1] = "\1",
+                [2] = {
+                    ["\3"] = "select",
+                    ["characterIndex"] = 1
+                }
+            },
+            [2] = "L"
         }
-        
-        game:GetService("ReplicatedStorage").Utility.AssetRequester.Remote:InvokeServer(unpack(args))
-        local args = {
-            [1] = "GetWeapons"
-        }
-        
-        game:GetService("ReplicatedStorage").remotes.getData:InvokeServer(unpack(args))
-        game:GetService("ReplicatedStorage").remotes.reloadInvy:InvokeServer()
-        local args = {
-            [1] = "Desert Temple"
-        }
-        
-        game:GetService("ReplicatedStorage").remotes.getDungeonStats:InvokeServer(unpack(args))
-        
-        local args = {
-            [1] = {
-                [1] = {
-                    [1] = "\1",
-                    [2] = {
-                        ["\3"] = "select",
-                        ["characterIndex"] = 1
-                    }
-                },
-                [2] = "L"
-            }
-        }
-        
-        game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))   
-wait(0.9)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/Best/main/Dungeon"))()
+    }
+    
+    game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))   
+    
+    wait(0.9)
+    
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/Best/main/Dungeon"))()
+    end)
+
+    if not success then
+        print("Error loading script: ", err)
+    end
+else
+    print("AutoMenu is not enabled.")
 end
-
-
-
